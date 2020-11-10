@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">pDAM</string>
+    <string name="app_logo">logo de la aplicación</string>
 </resources>
