@@ -29,4 +29,10 @@ public class UserProvider {
         return mDatabaseReference.child(user.getuID()).setValue(mapUser);
     }
 
+    public User getUsuarioById(String uID){
+        User user = null;
+
+        return user;
+    }
+
 }

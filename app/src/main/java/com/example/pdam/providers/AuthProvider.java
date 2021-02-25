@@ -5,6 +5,7 @@ import android.util.Log;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class AuthProvider {
 
@@ -24,6 +25,14 @@ public class AuthProvider {
     public Task<AuthResult> logear(String uMail, String uPass) {
         Log.i(TAG, "AuthProvider: logeo de usuario con eMail: " + uMail);
         return mAuth.signInWithEmailAndPassword(uMail, uPass);
+    }
+
+    public void cerarSecion(){
+        mAuth.signOut();
+    }
+
+    public FirebaseUser getUsuario(){
+        return mAuth.getCurrentUser();
     }
 
 }
