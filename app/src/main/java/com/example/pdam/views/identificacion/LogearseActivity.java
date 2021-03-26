@@ -1,4 +1,4 @@
-package com.example.pdam;
+package com.example.pdam.views.identificacion;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pdam.R;
+import com.example.pdam.views.PPAActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -33,12 +35,15 @@ public class LogearseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logearse);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Login");
+
         Log.i(TAG, "LogearseActivity: init");
 
-        etEmailLogin = (EditText)findViewById(R.id.etEmailLogin);
-        etUpassLogin = (EditText)findViewById(R.id.etUpassLogin);
+        etEmailLogin = (EditText) findViewById(R.id.etEmailLogin);
+        etUpassLogin = (EditText) findViewById(R.id.etUpassLogin);
 
-        btnLogearse = (Button)findViewById(R.id.btnLogearse);
+        btnLogearse = (Button) findViewById(R.id.btnLogearse);
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -56,22 +61,18 @@ public class LogearseActivity extends AppCompatActivity {
         String eMail = etEmailLogin.getText().toString();
         String uPass = etUpassLogin.getText().toString();
 
-        if(!eMail.isEmpty() && !uPass.isEmpty()){
+        if (!eMail.isEmpty() && !uPass.isEmpty()) {
             mAuth.signInWithEmailAndPassword(eMail, uPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     Log.i(TAG, "LogearseActivity: inicio de proceso de logeo");
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         Log.i(TAG, "LogearseActivity: logeo exitoso para: " + eMail);
                         Toast.makeText(LogearseActivity.this, "se ha logeado con exito", Toast.LENGTH_SHORT).show();
 
-                        /**
-                         * pasamos a pantalla principal de la aplicación
-                         */
                         Intent intent = new Intent(LogearseActivity.this, PPAActivity.class);
                         Log.i(TAG, "LogearseActivity: rederect a PPAActivity con usuario logeado");
                         startActivity(intent);
-
                     } else {
                         Log.i(TAG, "LogearseActivity: logeo fallado para: " + eMail);
                         Toast.makeText(LogearseActivity.this, "los credenciales no son correctos", Toast.LENGTH_SHORT).show();

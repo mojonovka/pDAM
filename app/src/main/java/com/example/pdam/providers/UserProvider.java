@@ -7,32 +7,56 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class UserProvider {
 
     DatabaseReference mDatabaseReference;
+    User userInf;
 
     private static final String TAG = "DEV";
 
+    /**
+     * imicialización de la clase
+     */
     public UserProvider() {
         mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("users");
         Log.i(TAG, "UserProvider: getReference() " + mDatabaseReference);
     }
 
-    public Task<Void> crear(User user) {
+    /**
+     * Guardar usuario en la base de datos
+     * @param user
+     * @return
+     */
+    public Task<Void> setUsuario(User user) {
         Log.i(TAG, "UserProvider: inserción datos de usuario a BD " + user);
-        Map<String, Object> mapUser = new HashMap<>();
-        mapUser.put("uName", user.getuName());
-        mapUser.put("uEmail", user.getuEmail());
-        return mDatabaseReference.child(user.getuID()).setValue(mapUser);
+        return mDatabaseReference.child(user.getuID()).setValue(user);
     }
 
-    public User getUsuarioById(String uID){
-        User user = null;
+    /**
+     * obtener usuario de la base de datos por su identificador
+     * @param uID
+     * @return
+     */
+    public DatabaseReference getUsuarioById(String uID){
 
-        return user;
+        //userInf = null;
+        /*
+        Log.i(TAG, "UserProvider: obtención de datos del usuario con uID  " + uID);
+
+        mDatabaseReference.child(uID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i(TAG, "UserProvider: fallo al obtener datos del usuario  " + snapshot.getValue(User.class));
+                //userInf =  new User(snapshot.getValue(User.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.i(TAG, "UserProvider: fallo al obtener datos del usuario  " + uID);
+                //fallo al obtener datos del usuario
+            }
+        });
+        */
+        return mDatabaseReference.child(uID);
     }
-
 }

@@ -5,17 +5,29 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PDAM">
-        <activity android:name=".LogearseActivity"></activity>
-        <activity android:name=".UserLayout" />
-        <activity android:name=".PPAActivity"></activity>
-        <activity android:name=".RegistrarseActivity" />
-        <activity android:name=".AuthMainActivity" />
+
+
+        <activity android:name=".views.usuario.UserLayout"
+            android:parentActivityName=".views.PPAActivity"/>
+
+        <activity android:name=".views.identificacion.AuthMainActivity"
+            android:parentActivityName=".views.PPAActivity"/>
+
+        <activity android:name=".views.identificacion.LogearseActivity"
+            android:parentActivityName=".views.identificacion.AuthMainActivity" />
+
+        <activity android:name=".views.identificacion.RegistrarseActivity"
+            android:parentActivityName=".views.identificacion.AuthMainActivity"/>
+
+        <activity android:name=".views.PPAActivity"></activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

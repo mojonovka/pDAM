@@ -6,6 +6,10 @@ public class User {
     private String uName;
     private String uEmail;
 
+    public User(){
+        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
+
     public User(String uName, String uEmail) {
         this.uName = uName;
         this.uEmail = uEmail;
@@ -16,6 +20,13 @@ public class User {
         this.uName = uName;
         this.uEmail = uEmail;
     }
+
+    public User(User usuario){
+        this.uID = usuario.uID;
+        this.uName  = usuario.uName;
+        this.uEmail = usuario.uEmail;
+    }
+
 
     public String getuID() {
         return uID;

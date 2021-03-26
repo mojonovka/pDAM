@@ -4,69 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UserLayout">
+    tools:context=".views.usuario.UserLayout">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    <fragment
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/unident"
-        android:visibility="invisible">
+        android:orientation="vertical"
+        android:paddingHorizontal="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center|right">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/ulTvNombre"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="IDENTIFICARSE"
-                android:textColor="@color/white">
+                android:text="Nombre completo"
+                android:textSize="30dp" />
 
-            </TextView>
+            <EditText
+                android:id="@+id/ulEtNombreCompleto"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:enabled="false"
+                android:textSize="25dp" />
 
         </LinearLayout>
-
-    </fragment>
-
-    <!--
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/ident"
-        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:visibility="invisible">
 
             <TextView
+                android:id="@+id/ulTvDireccion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dirección"
+                android:textSize="30dp" />
+
+            <EditText
+                android:id="@+id/ulEtDireccionCompleto"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:enabled="false"
+                android:textSize="25dp" />
+
+        </LinearLayout>
+
+
+        <!-- botones -->
+
+        <!-- modificar -->
+        <LinearLayout
+            android:id="@+id/ulLlModoficar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/ulBtnModificar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="UNKNOWN"
-                android:textColor="@color/white">
-
-            </TextView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="VER PERFIL"
-                android:textColor="@color/white">
-
-            </TextView>
+                android:layout_marginHorizontal="5dp"
+                android:text="modificar"/>
 
 
         </LinearLayout>
 
-    </fragment>
-    -->
+        <!-- cancelar, aplicar -->
+
+        <LinearLayout
+            android:id="@+id/ulLlAplicarCancelar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/ulBtnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:text="cancelar" />
+
+            <Button
+                android:id="@+id/ulBtnAplicar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="5dp"
+                android:text="aplicar" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

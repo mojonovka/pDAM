@@ -1,4 +1,4 @@
-package com.example.pdam;
+package com.example.pdam.views.identificacion;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.pdam.R;
 import com.example.pdam.models.User;
 import com.example.pdam.providers.AuthProvider;
 import com.example.pdam.providers.UserProvider;
@@ -33,6 +34,9 @@ public class RegistrarseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarse);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Creación de una cuenta nueva");
 
         Log.i(TAG, "RegistrarseActivity: init");
 
@@ -60,9 +64,7 @@ public class RegistrarseActivity extends AppCompatActivity {
         String uMail = etEmail.getText().toString();
         String uPass = etUpass.getText().toString();
 
-        /**
-         * validación de los datos de entrada
-         */
+        //validación de los datos de entrada
         if (!uName.isEmpty() && !uMail.isEmpty() && !uPass.isEmpty()) {
             Log.i(TAG, "RegistrarseActivity: datos introducidos son correctos");
             registrarCuenta(uName, uMail, uPass);
@@ -95,9 +97,8 @@ public class RegistrarseActivity extends AppCompatActivity {
     }
 
     private void guardarUsuario(String uID, String uName, String uMail) {
-        //Log.i(TAG, "RegistrarseActivity: guardamos los datos de nuevo usuario con eMail: " + uMail);
         User user = new User(uID, uName, uMail);
-        mUserProvider.crear(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mUserProvider.setUsuario(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 Log.i(TAG, "RegistrarseActivity: guardamos los datos en BD");

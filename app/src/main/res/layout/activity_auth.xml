@@ -6,9 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".AuthMainActivity">
-
-    <include layout="@layout/inc_toolbar"/>
+    tools:context=".views.identificacion.AuthMainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +19,7 @@
             android:id="@+id/btnIdentificarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="identificarse"
+            android:text="Ya tengo la cuenta"
             android:layout_marginBottom="30dp">
 
         </Button>
@@ -30,7 +28,7 @@
             android:id="@+id/btnRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="registrarse">
+            android:text="Crear una nueva cuenta">
 
         </Button>
 

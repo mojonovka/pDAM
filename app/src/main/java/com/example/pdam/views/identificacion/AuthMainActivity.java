@@ -1,4 +1,4 @@
-package com.example.pdam;
+package com.example.pdam.views.identificacion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.pdam.includes.IncToolBar;
+import com.example.pdam.R;
 
 public class AuthMainActivity extends AppCompatActivity {
 
@@ -22,9 +22,10 @@ public class AuthMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
 
-        Log.i(TAG, "AuthMainActivity: init");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Identificación");
 
-        //IncToolBar.show(this, "Autenticación", true);
+        Log.i(TAG, "AuthMainActivity: init");
 
         btnIdentifivarse = (Button)findViewById(R.id.btnIdentificarse);
         btnRegistrarse = (Button)findViewById(R.id.btnRegistrarse);
