@@ -17,6 +17,7 @@ import com.example.pdam.models.User;
 import com.example.pdam.providers.AuthProvider;
 import com.example.pdam.providers.UserProvider;
 import com.example.pdam.views.identificacion.AuthMainActivity;
+import com.example.pdam.views.propiedad.PropiedadesActivity;
 import com.example.pdam.views.usuario.UserLayout;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +40,9 @@ public class PPAActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ppa);
 
+        Log.i(TAG, "-----------------------------------------------------------------");
+        Log.i(TAG, "-----------------------------------------------------------------");
+        Log.i(TAG, "-----------------------------------------------------------------");
         Log.i(TAG, "PPAActivity: init");
 
         tvUserName = findViewById(R.id.tvUserName);
@@ -73,6 +77,7 @@ public class PPAActivity extends AppCompatActivity {
             tvUserName.setText("bienvenido");
             btnOpcion.setVisibility(View.VISIBLE);
         }
+        //invalidateOptionsMenu();
     }
 
     public void getDatosDelUsuario(String uID) {
@@ -82,7 +87,17 @@ public class PPAActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 Log.i(TAG, "PPAActivity: obtención de datos exitosa:");
-                usuario = new User(snapshot.getValue(User.class));
+
+                try {
+                    usuario = new User(snapshot.getValue(User.class));
+                } catch (Exception e){
+                    e.printStackTrace();
+                    Log.i(TAG, "PPAActivity: bad user data");
+                    //mAuthProvider.cerarSecion();
+                } finally {
+
+                }
+
                 Log.i(TAG, "PPAActivity: usuario: " + usuario.getuName());
 
                 tvUserName.setText(usuario.getuName());
@@ -100,29 +115,35 @@ public class PPAActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (fbUser != null) {
+        if(fbUser != null){
             getMenuInflater().inflate(R.menu.menu_items, menu);
-            return super.onCreateOptionsMenu(menu);
-        } else {
-            return false;
         }
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent intent;
         switch (item.getItemId()) {
-            case R.id.menu_cerrarSesion:
-                mAuthProvider.cerarSecion();
-                intent = new Intent(PPAActivity.this, PPAActivity.class);
-                startActivity(intent);
-                return true;
 
             case R.id.menu_verPerfil:
                 intent = new Intent(PPAActivity.this, UserLayout.class);
                 startActivity(intent);
                 return true;
+
+            case R.id.menu_propiedades:
+                intent = new Intent(PPAActivity.this, PropiedadesActivity.class);
+                intent.putExtra("usuario_id", fbUser.getUid());
+                startActivity(intent);
+                return true;
+
+            case R.id.menu_cerrarSesion:
+                mAuthProvider.cerarSecion();
+                intent = new Intent(PPAActivity.this, PPAActivity.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 }

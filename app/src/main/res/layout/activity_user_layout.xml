@@ -58,7 +58,7 @@
         </LinearLayout>
 
 
-        <!-- botones -->
+        <!-- botones START -->
 
         <!-- modificar -->
         <LinearLayout
@@ -104,6 +104,8 @@
                 android:text="aplicar" />
 
         </LinearLayout>
+
+        <!-- botones END -->
 
     </LinearLayout>
 

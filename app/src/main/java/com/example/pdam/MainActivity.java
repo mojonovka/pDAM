@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private void goToPPAActivity() {
         Log.i(TAG, "MainActivity: rederect a PPAActivity");
         startActivity(intent);
+        finish();
     }
 
 }

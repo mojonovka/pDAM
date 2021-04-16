@@ -108,6 +108,7 @@ public class RegistrarseActivity extends AppCompatActivity {
                     Intent intent = new Intent(RegistrarseActivity.this, LogearseActivity.class);
                     Log.i(TAG, "RegistrarseActivity: rederect a LogearseActivity");
                     startActivity(intent);
+                    finish();
                 } else {
                     Log.i(TAG, "RegistrarseActivity: fallo al guardar los datos en la BD");
                     Toast.makeText(RegistrarseActivity.this, "fallo al guardar el usuario", Toast.LENGTH_SHORT).show();

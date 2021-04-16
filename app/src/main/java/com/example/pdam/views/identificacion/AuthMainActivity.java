@@ -37,6 +37,7 @@ public class AuthMainActivity extends AppCompatActivity {
                 Intent intent = new Intent(AuthMainActivity.this, LogearseActivity.class);
                 Log.i(TAG, "AuthMainActivity: rederect a LogearseActivity");
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -47,6 +48,7 @@ public class AuthMainActivity extends AppCompatActivity {
                 Intent intent = new Intent(AuthMainActivity.this, RegistrarseActivity.class);
                 Log.i(TAG, "AuthMainActivity: rederect a RegistrarseActivity");
                 startActivity(intent);
+                finish();
             }
         });
 

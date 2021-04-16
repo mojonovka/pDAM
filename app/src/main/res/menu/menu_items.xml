@@ -3,16 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_cerrarSesion"
-        android:title="@string/cerrar_secion"
-        android:orderInCategory="10"
+        android:id="@+id/menu_verPerfil"
+        android:title="@string/ver_perfil"
+        android:orderInCategory="7"
         app:showAsAction="never"
         />
 
     <item
-        android:id="@+id/menu_verPerfil"
-        android:title="@string/ver_perfil"
+        android:id="@+id/menu_propiedades"
+        android:title="@string/propiedades"
         android:orderInCategory="7"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/menu_cerrarSesion"
+        android:title="@string/cerrar_secion"
+        android:orderInCategory="10"
         app:showAsAction="never"
         />
 

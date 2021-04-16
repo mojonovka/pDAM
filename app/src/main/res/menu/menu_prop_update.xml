@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_prop_update"
+        android:title="crear"
+        android:icon="@drawable/ic_prop_update"
+        android:orderInCategory="3"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/menu_prop_delete"
+        android:title="crear"
+        android:icon="@drawable/ic_prop_delete"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        />
+
+</menu>

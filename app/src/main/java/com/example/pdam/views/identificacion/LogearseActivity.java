@@ -73,6 +73,7 @@ public class LogearseActivity extends AppCompatActivity {
                         Intent intent = new Intent(LogearseActivity.this, PPAActivity.class);
                         Log.i(TAG, "LogearseActivity: rederect a PPAActivity con usuario logeado");
                         startActivity(intent);
+                        finish();
                     } else {
                         Log.i(TAG, "LogearseActivity: logeo fallado para: " + eMail);
                         Toast.makeText(LogearseActivity.this, "los credenciales no son correctos", Toast.LENGTH_SHORT).show();
