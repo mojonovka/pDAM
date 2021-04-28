@@ -14,14 +14,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.pdam.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -49,14 +47,6 @@ public class PropiedadesActivity extends AppCompatActivity implements PropiedadA
 
         Log.i(TAG, "PropiedadesActivity: init");
         Log.i(TAG, "PropiedadesActivity: onCreate");
-
-        /*
-        if(savedInstanceState != null){
-            usuario_id = savedInstanceState.getString("savedUserId");
-        } else {
-            usuario_id = getIntent().getStringExtra("usuario_id");
-        }
-        */
 
         inicializarComponentes();
 
@@ -96,7 +86,7 @@ public class PropiedadesActivity extends AppCompatActivity implements PropiedadA
                  *         .setAction("Action", null).show();
                  */
                 Intent intent = new Intent(PropiedadesActivity.this, PropiedadLayout.class);
-                intent.putExtra("mode", "create");
+                intent.putExtra("mode", "CREATE");
                 startActivity(intent);
             }
         });
@@ -135,8 +125,8 @@ public class PropiedadesActivity extends AppCompatActivity implements PropiedadA
     public void onListItemClick(int clickedItem) {
         Toast.makeText(PropiedadesActivity.this, "Selected item" + clickedItem, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(PropiedadesActivity.this, PropiedadLayout.class);
-        intent.putExtra("mode", "update");
-        intent.putExtra("pID",listaPropiedades.get(clickedItem).getpID());
+        intent.putExtra("mode", "UPDATE");
+        intent.putExtra("inmbID",listaPropiedades.get(clickedItem).getpID());
         startActivity(intent);
     }
 }

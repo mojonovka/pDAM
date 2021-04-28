@@ -11,24 +11,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PDAM">
-
-        <!-- propiedad START -->
-        <activity android:name=".views.propiedad.PropiedadLayout"
+        <activity android:name=".views.PPAAbout"
+            android:label="Acerca de ..."
+            android:parentActivityName=".views.PPAActivity"
+            />
+        <activity
+            android:name=".views.propiedad.PropSeachAttr"
+            android:label="Ajustes de busqueda" />
+        <activity android:name=".views.propiedad.PropAjusteDeBusqueda" /> <!-- propiedad START -->
+        <activity
+            android:name=".views.propiedad.PropiedadLayout"
             android:label="Propiedad"
-            android:parentActivityName=".views.propiedad.PropiedadesActivity"/>
+            android:parentActivityName=".views.propiedad.PropiedadesActivity" />
         <activity
             android:name=".views.propiedad.PropiedadesActivity"
             android:label="@string/title_activity_propiedad"
             android:parentActivityName=".views.PPAActivity"
-            android:theme="@style/Theme.PDAM.NoActionBar" />
-        <!-- propiedad END -->
-
+            android:theme="@style/Theme.PDAM.NoActionBar" /> <!-- propiedad END -->
         <!-- usuario START -->
         <activity
             android:name=".views.usuario.UserLayout"
-            android:parentActivityName=".views.PPAActivity" />
-        <!-- usuario START -->
-
+            android:parentActivityName=".views.PPAActivity" /> <!-- usuario END -->
         <!-- auth START -->
         <activity
             android:name=".views.identificacion.AuthMainActivity"
@@ -38,9 +41,7 @@
             android:parentActivityName=".views.identificacion.AuthMainActivity" />
         <activity
             android:name=".views.identificacion.RegistrarseActivity"
-            android:parentActivityName=".views.identificacion.AuthMainActivity" />
-        <!-- auth END -->
-
+            android:parentActivityName=".views.identificacion.AuthMainActivity" /> <!-- auth END -->
         <!-- app START -->
         <activity android:name=".views.PPAActivity" />
         <activity android:name=".MainActivity">
@@ -50,7 +51,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- app END -->
     </application>
 
 </manifest>

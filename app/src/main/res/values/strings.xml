@@ -35,4 +35,6 @@
     <string name="prop_hint_ej_04740">ej. 04740</string>
     <string name="prop_hint_tipo_de_via_edificio_bloue_piso_puerta">tipo de via, edificio, bloue, piso, puerta</string>
     <string name="prop_hint_horas_dias_meses">horas, dias, meses</string>
+    <string name="btnaddprop">btnADDprop</string>
+    <string name="menu_about">About</string>
 </resources>

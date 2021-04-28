@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -16,16 +17,18 @@ import com.example.pdam.models.Propiedad;
 import com.example.pdam.models.User;
 import com.example.pdam.providers.AuthProvider;
 import com.example.pdam.providers.PropiedadProvider;
+import com.example.pdam.providers.UserProvider;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 public class PropiedadLayout extends AppCompatActivity {
 
-    private Propiedad prop;
+    private Propiedad inmbl;
     private AuthProvider mAuthProvider;
     private PropiedadProvider mPropiedadProvider;
     private FirebaseUser fbUser;
@@ -38,12 +41,14 @@ public class PropiedadLayout extends AppCompatActivity {
     private EditText etPropMunicipio;
     private EditText etPropCP;
     private EditText etPropDireccion;
+
+    private String inmblID;
     private String propID;
 
     private static final String TAG = "DEV";
 
     private enum MODE{
-        CREATE, READ, UPDATE, DELETE, UNDEFINED
+        CREATE, UPDATE, ALQUILER, UNDEFINED
     }
 
     MODE mode;
@@ -59,39 +64,62 @@ public class PropiedadLayout extends AppCompatActivity {
         initComponents();
 
         switch (getIntent().getStringExtra("mode")){
-            case "create":
+            case "CREATE":
                 mode = MODE.CREATE;
                 getSupportActionBar().setTitle("Propiedad nueva");
                 break;
-            case "update":
+            case "UPDATE":
                 mode = MODE.UPDATE;
                 getSupportActionBar().setTitle("Propiedad modificación");
-                propID = getIntent().getStringExtra("pID");
-                mPropiedadProvider.getPropiedadById(propID).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        prop = new Propiedad(snapshot.getValue(Propiedad.class));
-                        etPropNombreDescriptivo.setText(prop.getnombreDescriptivo());
-                        etPropTipo.setText(prop.getTipo());
-                        etPropPrecio.setText(prop.getPrecio());
-                        etPropPeriodo.setText(prop.getPeriodo());
-                        etPropProvincia.setText(prop.getProvincia());
-                        etPropMunicipio.setText(prop.getMunicipio());
-                        etPropCP.setText(prop.getCp());
-                        etPropDireccion.setText(prop.getDireccion());
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
+                inmblID = getIntent().getStringExtra("inmbID");
+                rellenarPropiedad(inmblID);
                 break;
+
+            case "ALQUILER":
+                mode = MODE.ALQUILER;
+                getSupportActionBar().setTitle("Propiedad, datos detallados");
+                inmblID = getIntent().getStringExtra("inmbID");
+                rellenarPropiedad(inmblID);
+                deshabilitarComponentes();
+                break;
+
             default:
                 mode = MODE.UNDEFINED;
         }
 
+    }
+
+    private void deshabilitarComponentes() {
+        etPropNombreDescriptivo.setEnabled(false);
+        etPropTipo.setEnabled(false);
+        etPropPrecio.setEnabled(false);
+        etPropPeriodo.setEnabled(false);
+        etPropProvincia.setEnabled(false);
+        etPropMunicipio.setEnabled(false);
+        etPropCP.setEnabled(false);
+        etPropDireccion.setEnabled(false);
+    }
+
+    private void rellenarPropiedad(String inmbID) {
+        mPropiedadProvider.getPropiedadById(inmbID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                inmbl = new Propiedad(snapshot.getValue(Propiedad.class));
+                etPropNombreDescriptivo.setText(inmbl.getnombreDescriptivo());
+                etPropTipo.setText(inmbl.getTipo());
+                etPropPrecio.setText(inmbl.getPrecio());
+                etPropPeriodo.setText(inmbl.getPeriodo());
+                etPropProvincia.setText(inmbl.getProvincia());
+                etPropMunicipio.setText(inmbl.getMunicipio());
+                etPropCP.setText(inmbl.getCp());
+                etPropDireccion.setText(inmbl.getDireccion());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -114,6 +142,9 @@ public class PropiedadLayout extends AppCompatActivity {
             case UPDATE:
                 getMenuInflater().inflate(R.menu.menu_prop_update, menu);
                 break;
+            case ALQUILER:
+                getMenuInflater().inflate(R.menu.menu_prop_alquiler, menu);
+                break;
         }
         return super.onPrepareOptionsMenu(menu);
     }
@@ -135,20 +166,46 @@ public class PropiedadLayout extends AppCompatActivity {
                 eliminarPropiedad();
                 return true;
 
+            case R.id.menu_prop_alqiler:
+                alqularPropiedad();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    private void alqularPropiedad() {
+
+        String propietarioID = inmbl.getId_usuario();
+
+        UserProvider userProvider = new UserProvider();
+
+        DatabaseReference mdaDatabaseReference = userProvider.getUsuarioById(propietarioID);
+
+        mdaDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = new User(snapshot.getValue(User.class));
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + user.getuEmail()));
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+
     private void eliminarPropiedad() {
-        mPropiedadProvider.eliminarPropiedad(getIntent().getStringExtra("pID")).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mPropiedadProvider.eliminarPropiedad(getIntent().getStringExtra("inmbID")).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Log.i(TAG, "PropiedadLayout: propiedad se ha eleminado con exito");
                     Toast.makeText(PropiedadLayout.this,"Propiedad se ha eleminado con exito", Toast.LENGTH_LONG).show();
-                    //Intent intent = new Intent(PropiedadLayout.this, PropiedadesActivity.class);
-                    //startActivity(intent);
                     finish();
                 }
             }
@@ -157,16 +214,14 @@ public class PropiedadLayout extends AppCompatActivity {
 
     private void crearPropiedad() {
 
-        prop = setPropiedad();
-        if (prop != null){
-            mPropiedadProvider.setPropiedad(prop).addOnCompleteListener(new OnCompleteListener<Void>() {
+        inmbl = setPropiedad();
+        if (inmbl != null){
+            mPropiedadProvider.setPropiedad(inmbl).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
                         Log.i(TAG, "PropiedadLayout: propiedad se ha creado co exito");
                         Toast.makeText(PropiedadLayout.this,"Propiedad se ha guardado con exito", Toast.LENGTH_LONG).show();
-                        //Intent intent = new Intent(PropiedadLayout.this, PropiedadesActivity.class);
-                        //startActivity(intent);
                         finish();
                     } else {
                         Log.i(TAG, "PropiedadLayout: fallo al guardar la propiedad");
@@ -178,15 +233,13 @@ public class PropiedadLayout extends AppCompatActivity {
     }
 
     private void actualizarPropiedad() {
-        prop = setPropiedad();
-        prop.setpID(getIntent().getStringExtra("pID"));
-        mPropiedadProvider.updatePropiedad(prop).addOnCompleteListener(new OnCompleteListener<Void>() {
+        inmbl = setPropiedad();
+        inmbl.setpID(getIntent().getStringExtra("inmbID"));
+        mPropiedadProvider.updatePropiedad(inmbl).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(PropiedadLayout.this, "Propiedad actualizada", Toast.LENGTH_LONG).show();
-                    //Intent intent = new Intent(PropiedadLayout.this, PropiedadesActivity.class);
-                    //startActivity(intent);
                     finish();
                 }
             }

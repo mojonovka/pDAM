@@ -31,7 +31,8 @@ public class PropiedadAdapter extends RecyclerView.Adapter<PropiedadAdapter.View
     @NonNull
     @Override
     public PropiedadAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_prop_row, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_prop_row_card, parent, false);
+        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_prop_row, parent, false);
         return new PropiedadAdapter.ViewHolder(view);
     }
 

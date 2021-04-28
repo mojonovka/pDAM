@@ -5,13 +5,20 @@
     <item
         android:id="@+id/menu_verPerfil"
         android:title="@string/ver_perfil"
-        android:orderInCategory="7"
+        android:orderInCategory="3"
         app:showAsAction="never"
         />
 
     <item
         android:id="@+id/menu_propiedades"
         android:title="@string/propiedades"
+        android:orderInCategory="6"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/menu_about"
+        android:title="@string/menu_about"
         android:orderInCategory="7"
         app:showAsAction="never"
         />

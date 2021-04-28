@@ -3,26 +3,101 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
-
-    <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.example.pdam.views.propiedad.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
-
+    app:startDestination="@id/mainActivity">
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.pdam.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" >
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.example.pdam.views.propiedad.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
-
+            android:id="@+id/action_mainActivity_to_PPAActivity2"
+            app:destination="@id/PPAActivity" />
+    </activity>
+    <activity
+        android:id="@+id/PPAActivity"
+        android:name="com.example.pdam.views.PPAActivity"
+        android:label="activity_ppa"
+        tools:layout="@layout/activity_ppa" >
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
-    </fragment>
+            android:id="@+id/action_PPAActivity_to_authMainActivity"
+            app:destination="@id/authMainActivity" />
+        <action
+            android:id="@+id/action_PPAActivity_to_propAjusteDeBusqueda"
+            app:destination="@id/propAjusteDeBusqueda" />
+        <action
+            android:id="@+id/action_PPAActivity_to_userLayout"
+            app:destination="@id/userLayout" />
+        <action
+            android:id="@+id/action_PPAActivity_to_propiedadesActivity"
+            app:destination="@id/propiedadesActivity" />
+    </activity>
+    <activity
+        android:id="@+id/authMainActivity"
+        android:name="com.example.pdam.views.identificacion.AuthMainActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_auth" >
+        <action
+            android:id="@+id/action_authMainActivity_to_registrarseActivity"
+            app:destination="@id/registrarseActivity" />
+        <action
+            android:id="@+id/action_authMainActivity_to_logearseActivity"
+            app:destination="@id/logearseActivity" />
+    </activity>
+    <activity
+        android:id="@+id/logearseActivity"
+        android:name="com.example.pdam.views.identificacion.LogearseActivity"
+        android:label="activity_logearse"
+        tools:layout="@layout/activity_logearse" >
+        <action
+            android:id="@+id/action_logearseActivity_to_PPAActivity"
+            app:destination="@id/PPAActivity" />
+    </activity>
+    <activity
+        android:id="@+id/registrarseActivity"
+        android:name="com.example.pdam.views.identificacion.RegistrarseActivity"
+        android:label="activity_registrarse"
+        tools:layout="@layout/activity_registrarse" >
+        <action
+            android:id="@+id/action_registrarseActivity_to_logearseActivity"
+            app:destination="@id/logearseActivity" />
+    </activity>
+    <activity
+        android:id="@+id/propAjusteDeBusqueda"
+        android:name="com.example.pdam.views.propiedad.PropAjusteDeBusqueda"
+        android:label="activity_prop_ajuste_de_busqueda"
+        tools:layout="@layout/activity_prop_ajuste_de_busqueda" >
+        <action
+            android:id="@+id/action_propAjusteDeBusqueda_to_PPAActivity"
+            app:destination="@id/PPAActivity" />
+    </activity>
+    <activity
+        android:id="@+id/userLayout"
+        android:name="com.example.pdam.views.usuario.UserLayout"
+        android:label="activity_user_layout"
+        tools:layout="@layout/activity_user_layout" >
+        <action
+            android:id="@+id/action_userLayout_to_PPAActivity"
+            app:destination="@id/PPAActivity" />
+    </activity>
+    <activity
+        android:id="@+id/propiedadesActivity"
+        android:name="com.example.pdam.views.propiedad.PropiedadesActivity"
+        android:label="activity_propiedades"
+        tools:layout="@layout/activity_propiedades" >
+        <action
+            android:id="@+id/action_propiedadesActivity_to_propiedadLayout"
+            app:destination="@id/propiedadLayout" />
+        <action
+            android:id="@+id/action_propiedadesActivity_to_PPAActivity"
+            app:destination="@id/PPAActivity" />
+    </activity>
+    <activity
+        android:id="@+id/propiedadLayout"
+        android:name="com.example.pdam.views.propiedad.PropiedadLayout"
+        android:label="activity_propiedad_layout"
+        tools:layout="@layout/activity_propiedad_layout" >
+        <action
+            android:id="@+id/action_propiedadLayout_to_propiedadesActivity"
+            app:destination="@id/propiedadesActivity" />
+    </activity>
 </navigation>

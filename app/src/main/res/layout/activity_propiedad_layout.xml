@@ -9,289 +9,314 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_margin="1dp"
-        android:background="@color/cardview_light_background">
+        android:background="@color/cardview_light_background"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="10dp"
-
-            android:orientation="vertical">
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/plTvPropNombreDescriptivo"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/prop_nombre_descriptivo"
-                    android:textColor="@color/purple_500"
-                    android:textSize="20sp" />
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp">
 
-                <EditText
-                    android:id="@+id/plEtPropNombreDescriptivo"
-                    android:hint="@string/prop_hint_breve_y_clara"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="25sp"
-                    android:inputType="text"
-                    android:importantForAutofill="no" />
+                    <TextView
+                        android:id="@+id/plTvPropNombreDescriptivo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/prop_nombre_descriptivo"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/plEtPropNombreDescriptivo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/prop_hint_breve_y_clara"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textSize="25sp" />
 
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+            <!--
             <com.google.android.material.internal.BaselineLayout
                 android:layout_width="match_parent"
                 android:layout_height="3dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="3dp"
-                android:background="@color/cardview_dark_background"/>
+                android:background="@color/cardview_dark_background" />
+-->
+            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp">
+
+                    <TextView
+                        android:id="@+id/plTvPropTipo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/prop_tipo"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/plEtPropTipo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/prop_hint_tipo_de_la_propiedad"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/plTvPropTipo"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/purple_500"
-                    android:text="@string/prop_tipo"
-                    android:textSize="20sp" />
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp">
 
-                <EditText
-                    android:id="@+id/plEtPropTipo"
-                    android:hint="@string/prop_hint_tipo_de_la_propiedad"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="25sp"
-                    android:inputType="text"
-                    android:importantForAutofill="no" />
+                    <TextView
+                        android:id="@+id/plTvPropPeriodo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/prop_periodo"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/plEtPropPeriodo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/prop_hint_horas_dias_meses"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textSize="25sp" />
 
-            <com.google.android.material.internal.BaselineLayout
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/cardview_dark_background"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/plTvPropPeriodo"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/prop_periodo"
-                    android:textColor="@color/purple_500"
-                    android:textSize="20sp" />
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp">
 
-                <EditText
-                    android:id="@+id/plEtPropPeriodo"
-                    android:hint="@string/prop_hint_horas_dias_meses"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="25sp"
-                    android:inputType="text"
-                    android:importantForAutofill="no"/>
+                    <TextView
+                        android:id="@+id/plTvPropPrecio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/prop_precio"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/plEtPropPrecio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/prop_hint_25"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textSize="25sp" />
 
-            <com.google.android.material.internal.BaselineLayout
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/cardview_dark_background"/>
-
-            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/plTvPropPrecio"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/prop_precio"
-                    android:textColor="@color/purple_500"
-                    android:textSize="20sp" />
-
-                <EditText
-                    android:id="@+id/plEtPropPrecio"
-                    android:hint="@string/prop_hint_25"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="25sp"
-                    android:inputType="number"
-                    android:importantForAutofill="no"/>
-
-            </LinearLayout>
-
-            <com.google.android.material.internal.BaselineLayout
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/cardview_dark_background"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
 
             <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/plTvPropProvincia"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/prop_provincia"
-                    android:textColor="@color/purple_500"
-                    android:textSize="20sp" />
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp">
 
-                <EditText
-                    android:id="@+id/plEtPropProvincia"
-                    android:hint="@string/prop_hint_ej_almer_a_granada"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="25sp"
-                    android:inputType="text"
-                    android:importantForAutofill="no" />
+                    <TextView
+                        android:id="@+id/plTvPropProvincia"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/prop_provincia"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/plEtPropProvincia"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/prop_hint_ej_almer_a_granada"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textSize="25sp" />
 
-            <com.google.android.material.internal.BaselineLayout
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/cardview_dark_background"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/plTvPropMunicipio"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/prop_municipio"
-                    android:textColor="@color/purple_500"
-                    android:textSize="20sp" />
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp">
 
-                <EditText
-                    android:id="@+id/plEtPropMunicipio"
-                    android:hint="@string/prop_himt_nombre_de_la_poblacion"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="25sp"
-                    android:inputType="text"
-                    android:importantForAutofill="no"/>
+                    <TextView
+                        android:id="@+id/plTvPropMunicipio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/prop_municipio"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/plEtPropMunicipio"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/prop_himt_nombre_de_la_poblacion"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textSize="25sp" />
 
-            <com.google.android.material.internal.BaselineLayout
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/cardview_dark_background"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/plTvPropCP"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/prop_cp"
-                    android:textColor="@color/purple_500"
-                    android:textSize="20sp" />
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp">
 
-                <EditText
-                    android:id="@+id/plEtPropCP"
-                    android:hint="@string/prop_hint_ej_04740"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="25sp"
-                    android:inputType="number"
-                    android:importantForAutofill="no"/>
+                    <TextView
+                        android:id="@+id/plTvPropCP"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/prop_cp"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/plEtPropCP"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/prop_hint_ej_04740"
+                        android:importantForAutofill="no"
+                        android:inputType="number"
+                        android:textSize="25sp" />
 
-            <com.google.android.material.internal.BaselineLayout
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/cardview_dark_background"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
-            <LinearLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="5dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
 
-                <TextView
-                    android:id="@+id/plTvPropDireccion"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/prop_direccion"
-                    android:textColor="@color/purple_500"
-                    android:textSize="20sp" />
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp">
 
-                <EditText
-                    android:id="@+id/plEtPropDireccion"
-                    android:hint="@string/prop_hint_tipo_de_via_edificio_bloue_piso_puerta"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="25sp"
-                    android:inputType="text"
-                    android:importantForAutofill="no"/>
+                    <TextView
+                        android:id="@+id/plTvPropDireccion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/prop_direccion"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp" />
 
-            </LinearLayout>
+                    <EditText
+                        android:id="@+id/plEtPropDireccion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/prop_hint_tipo_de_via_edificio_bloue_piso_puerta"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textSize="25sp" />
 
-            <com.google.android.material.internal.BaselineLayout
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/cardview_dark_background"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
