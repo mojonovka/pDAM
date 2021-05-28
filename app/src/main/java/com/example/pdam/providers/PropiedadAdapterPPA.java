@@ -1,7 +1,5 @@
 package com.example.pdam.providers;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,53 +16,43 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class PropiedadAdapter extends RecyclerView.Adapter<PropiedadAdapter.ViewHolder> {
+public class PropiedadAdapterPPA extends RecyclerView.Adapter<PropiedadAdapterPPA.ViewHolder> {
 
     ArrayList<Inmueble> listaPropiedades;
-    final private ListItemClick mOnClickListener;
+    final private PropiedadAdapterPPA.ListItemClick mOnClickListener;
 
     public interface ListItemClick{
         void onListItemClick(int clickedItem);
     }
 
-    public PropiedadAdapter(ArrayList<Inmueble> listaPropiedades, ListItemClick listener){
+    public PropiedadAdapterPPA(ArrayList<Inmueble> listaPropiedades, PropiedadAdapterPPA.ListItemClick listener){
         this.listaPropiedades = listaPropiedades;
         mOnClickListener = listener;
     }
 
     @NonNull
     @Override
-    public PropiedadAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PropiedadAdapterPPA.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_prop_row_card, parent, false);
-        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_prop_row, parent, false);
-        return new PropiedadAdapter.ViewHolder(view);
+        return new PropiedadAdapterPPA.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PropiedadAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PropiedadAdapterPPA.ViewHolder holder, int position) {
+
         holder.tvPropNombreDescriptivo.setText(listaPropiedades.get(position).getInmbNombreDesc());
         holder.tvPropMunicipio.setText(listaPropiedades.get(position).getInmbMunicipio());
         holder.tvPropPeriodo.setText(" ");
         holder.tvPropPrecio.setText(listaPropiedades.get(position).getInmbPeriodo() + " / " +listaPropiedades.get(position).getInmbPrecio() + "€");
         Picasso.get().load(listaPropiedades.get(position).getInmbFotoURI()).into(holder.ivPropFoto);
 
-        if (listaPropiedades.get(position).getInmbDisp()){
-            holder.fabDisponible.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
-        }else {
-            holder.fabDisponible.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
-        }
-
-        holder.fabDisponible.setEnabled(false);
+        holder.fabDisponible.hide();
 
     }
 
     @Override
     public int getItemCount() {
-        try {
-            return listaPropiedades.size();
-        } catch (Exception ex){
-            return 0;
-        }
+        return listaPropiedades.size();
     }
 
     /**
@@ -75,6 +63,7 @@ public class PropiedadAdapter extends RecyclerView.Adapter<PropiedadAdapter.View
         private TextView tvPropNombreDescriptivo, tvPropMunicipio, tvPropPeriodo, tvPropPrecio;
         private ImageView ivPropFoto;
         private FloatingActionButton fabDisponible;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,4 +85,5 @@ public class PropiedadAdapter extends RecyclerView.Adapter<PropiedadAdapter.View
             mOnClickListener.onListItemClick(clickedItem);
         }
     }
+
 }

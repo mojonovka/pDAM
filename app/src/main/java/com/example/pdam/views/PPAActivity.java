@@ -18,15 +18,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.pdam.R;
-import com.example.pdam.models.Propiedad;
+import com.example.pdam.models.Inmueble;
 import com.example.pdam.models.User;
 import com.example.pdam.providers.AuthProvider;
-import com.example.pdam.providers.PropiedadAdapter;
+import com.example.pdam.providers.PropiedadAdapterPPA;
 import com.example.pdam.providers.PropiedadProvider;
 import com.example.pdam.providers.UserProvider;
 import com.example.pdam.views.identificacion.AuthMainActivity;
+import com.example.pdam.views.propiedad.PropInfo;
 import com.example.pdam.views.propiedad.PropSeachAttr;
-import com.example.pdam.views.propiedad.PropiedadLayout;
 import com.example.pdam.views.propiedad.PropiedadesActivity;
 import com.example.pdam.views.usuario.UserLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,7 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.ListItemClick{
+public class PPAActivity extends AppCompatActivity implements PropiedadAdapterPPA.ListItemClick{
 
     private TextView tvUserName;
     private Button btnOpcion;
@@ -49,8 +49,9 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
     private UserProvider mUserProvider;
     private FirebaseUser fbUser;
 
-    private ArrayList<Propiedad> listaPropiedades;
-    private PropiedadAdapter propiedadAdapter;
+    private ArrayList<Inmueble> listaPropiedades;
+    //private PropiedadAdapter propiedadAdapter;
+    private PropiedadAdapterPPA propiedadAdapter;
     private RecyclerView rvPropiedades;
     private PropiedadProvider propiedadProvider;
     private LinearLayoutManager llManager;
@@ -117,7 +118,7 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
         rvPropiedades = findViewById(R.id.propiedadesLista);
         llManager = new LinearLayoutManager(this);
         rvPropiedades.setLayoutManager(llManager);
-        propiedadAdapter = new PropiedadAdapter(listaPropiedades, PPAActivity.this);
+        propiedadAdapter = new PropiedadAdapterPPA(listaPropiedades, PPAActivity.this);
         rvPropiedades.setAdapter(propiedadAdapter);
 
         sharedPreferences = getSharedPreferences("attrSeach", Context.MODE_PRIVATE);
@@ -126,18 +127,6 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
         saMunicipio = sharedPreferences.getString("saMunicipio", "");
         saPeriodo = sharedPreferences.getString("saPeriodo","");
 
-        /*
-        if(savedInstanceState != null){
-            saProvincia = savedInstanceState.getString("saProvincia");
-            saMunicipio = savedInstanceState.getString("saMunicipio");
-            saPeriodo = savedInstanceState.getString("saPeriodo");
-        } else {
-            saProvincia = "";
-            saMunicipio = "";
-            saPeriodo = "";
-        }
-        */
-
     }
 
     private void setEventListeners() {
@@ -145,9 +134,9 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
         btnOpcion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "PPAActivity: inicio de identifiación");
+                //Log.i(TAG, "PPAActivity: inicio de identifiación");
                 Intent intent = new Intent(PPAActivity.this, AuthMainActivity.class);
-                Log.i(TAG, "PPAActivity: rederect a AuthMainActivity");
+                //Log.i(TAG, "PPAActivity: rederect a AuthMainActivity");
                 startActivity(intent);
             }
         });
@@ -195,11 +184,11 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
                 } catch (Exception e){
                     e.printStackTrace();
                     Log.i(TAG, "PPAActivity: bad user data");
-                    //mAuthProvider.cerarSecion();
+                    mAuthProvider.cerarSecion();
                 } finally {
 
                 }
-
+                //fallo manejar mejor la auth del usuario
                 Log.i(TAG, "PPAActivity: usuario: " + usuario.getuName());
 
                 tvUserName.setText(usuario.getuName());
@@ -210,6 +199,7 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.i(TAG, "PPAActivity: obtención de datos ha fallado:");
                 tvUserName.setText("algo va mal");
+                mAuthProvider.cerarSecion();
                 usuario = null;
             }
         });
@@ -258,8 +248,7 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
         Log.i(TAG, "PropiedadesActivity: rellenarPropiedades()");
 
         propiedadProvider.getPropiedadesDataBaseReference()
-                //.orderByChild("id_usuario")
-                //.equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .orderByChild("inmbTimeStamp").limitToLast(25)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -268,7 +257,7 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
                         listaPropiedades.clear();
                         //Log.i(TAG, "PropiedadesActivity: lista.clear() " + listaPropiedades.size());
                         for(DataSnapshot objDataSnapshot : snapshot.getChildren()){
-                            Propiedad prop = objDataSnapshot.getValue(Propiedad.class);
+                            Inmueble prop = objDataSnapshot.getValue(Inmueble.class);
 
                             if(isGoodForSeach(prop)){
                                 listaPropiedades.add(prop);
@@ -285,30 +274,38 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
 
                     }
                 });
+        /**
+         * .orderByChild("inmbID")
+         * .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
+         */
     }
 
-    private boolean isGoodForSeach(Propiedad prop) {
+    private boolean isGoodForSeach(Inmueble prop) {
 
         boolean isGFS = true;
         //Log.i(TAG, "PropiedadesActivity: isGoodForSeach " + prop.toString());
         //Log.i(TAG, "PropiedadesActivity: saProvincia " + saProvincia);
 
+        if (!prop.getInmbDisp()){
+            isGFS = false;
+        }
+
         if(!saProvincia.isEmpty()){
             //Log.i(TAG, "PropiedadesActivity: saProvincia != \"\" ");
-            if (!prop.getProvincia().equalsIgnoreCase(saProvincia)){
+            if (!prop.getInmbProvincia().equalsIgnoreCase(saProvincia)){
                 //Log.i(TAG, "PropiedadesActivity: !prop.getProvincia().equalsIgnoreCase(saProvincia)");
                 isGFS = false;
             }
         }
 
         if(!saMunicipio.isEmpty()){
-            if (!prop.getMunicipio().equalsIgnoreCase(saMunicipio)){
+            if (!prop.getInmbMunicipio().equalsIgnoreCase(saMunicipio)){
                 isGFS = false;
             }
         }
 
         if(!saPeriodo.isEmpty()){
-            if (!prop.getPeriodo().equalsIgnoreCase(saPeriodo)){
+            if (!prop.getInmbPeriodo().equalsIgnoreCase(saPeriodo)){
                 isGFS = false;
             }
         }
@@ -326,10 +323,9 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
     public void onListItemClick(int clickedItem) {
 
         if(fbUser != null){
-            Intent intent = new Intent(PPAActivity.this, PropiedadLayout.class);
-            intent.putExtra("usuarioID", fbUser.getUid().toString());
-            intent.putExtra("inmbID", listaPropiedades.get(clickedItem).getpID());
-            intent.putExtra("mode", "ALQUILER");
+            Intent intent = new Intent(PPAActivity.this, PropInfo.class);
+            intent.putExtra("usuarioID", fbUser.getUid());
+            intent.putExtra("inmbID", listaPropiedades.get(clickedItem).getInmbID());
             startActivity(intent);
         } else {
             Snackbar.make(rvPropiedades, "nesesitas identificarse", Snackbar.LENGTH_LONG)
@@ -373,12 +369,6 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapter.L
         saProvincia = savedInstanceState.getString("saProvincia");
         saMunicipio = savedInstanceState.getString("saMunicipio");
         saPeriodo = savedInstanceState.getString("saPeriodo");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "PropiedadesActivity: onDestroy()");
     }
 
     @Override

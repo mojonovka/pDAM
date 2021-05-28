@@ -23,7 +23,7 @@ public class AuthMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_auth);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Identificación");
+        //getSupportActionBar().setTitle("Identificación");
 
         Log.i(TAG, "AuthMainActivity: init");
 
@@ -33,22 +33,22 @@ public class AuthMainActivity extends AppCompatActivity {
         btnIdentifivarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "AuthMainActivity: inicio de identifiación");
+                //Log.i(TAG, "AuthMainActivity: inicio de identifiación");
                 Intent intent = new Intent(AuthMainActivity.this, LogearseActivity.class);
-                Log.i(TAG, "AuthMainActivity: rederect a LogearseActivity");
+                //Log.i(TAG, "AuthMainActivity: rederect a LogearseActivity");
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 
         btnRegistrarse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(TAG, "AuthMainActivity: inicio de registro");
+                //Log.i(TAG, "AuthMainActivity: inicio de registro");
                 Intent intent = new Intent(AuthMainActivity.this, RegistrarseActivity.class);
-                Log.i(TAG, "AuthMainActivity: rederect a RegistrarseActivity");
+                //Log.i(TAG, "AuthMainActivity: rederect a RegistrarseActivity");
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
 

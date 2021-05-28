@@ -3,6 +3,7 @@ package com.example.pdam.views.propiedad;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.pdam.models.Inmueble;
 import com.example.pdam.models.Propiedad;
 import com.example.pdam.providers.PropiedadAdapter;
 import com.example.pdam.providers.PropiedadProvider;
@@ -25,11 +26,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class PropiedadesActivity extends AppCompatActivity implements PropiedadAdapter.ListItemClick{
 
     private RecyclerView rvPropiedades;
-    private ArrayList<Propiedad> listaPropiedades;
+    private ArrayList<Inmueble> listaPropiedades;
     private PropiedadAdapter propiedadAdapter;
     private PropiedadProvider propiedadProvider;
     private LinearLayoutManager llManager;
@@ -97,7 +101,7 @@ public class PropiedadesActivity extends AppCompatActivity implements PropiedadA
         Log.i(TAG, "PropiedadesActivity: rellenarPropiedades()");
 
         propiedadProvider.getPropiedadesDataBaseReference()
-                .orderByChild("id_usuario")
+                .orderByChild("inmbPropID")
                 .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
             @Override
@@ -107,10 +111,19 @@ public class PropiedadesActivity extends AppCompatActivity implements PropiedadA
                 listaPropiedades.clear();
                 //Log.i(TAG, "PropiedadesActivity: lista.clear() " + listaPropiedades.size());
                 for(DataSnapshot objDataSnapshot : snapshot.getChildren()){
-                    Propiedad prop = objDataSnapshot.getValue(Propiedad.class);
+                    Inmueble prop = objDataSnapshot.getValue(Inmueble.class);
                     listaPropiedades.add(prop);
                 }
                 Log.i(TAG, "PropiedadesActivity: lista.add() " + listaPropiedades.size());
+                /* sort by timestamp */
+                listaPropiedades.sort(new Comparator<Inmueble>() {
+                    @Override
+                    public int compare(Inmueble o1, Inmueble o2) {
+                        Log.i(TAG, "PropiedadesActivity: sort " + String.valueOf(o1.getInmbTimeStamp()));
+                        Log.i(TAG, "PropiedadesActivity: sort " + String.valueOf(o2.getInmbTimeStamp()));
+                        return String.valueOf(o2.getInmbTimeStamp()).compareTo(String.valueOf(o1.getInmbTimeStamp()));
+                    }
+                });
                 propiedadAdapter.notifyDataSetChanged();
             }
 
@@ -121,12 +134,18 @@ public class PropiedadesActivity extends AppCompatActivity implements PropiedadA
         });
     }
 
+    /**
+     * .orderByChild("inmbTimeStamp")
+     *                 .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
+     * @param clickedItem
+     */
+
     @Override
     public void onListItemClick(int clickedItem) {
         Toast.makeText(PropiedadesActivity.this, "Selected item" + clickedItem, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(PropiedadesActivity.this, PropiedadLayout.class);
         intent.putExtra("mode", "UPDATE");
-        intent.putExtra("inmbID",listaPropiedades.get(clickedItem).getpID());
+        intent.putExtra("inmbID",listaPropiedades.get(clickedItem).getInmbID());
         startActivity(intent);
     }
 }

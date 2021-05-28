@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
+        android:background="@color/bg_gris"
         android:padding="20dp">
 
         <TextView
@@ -33,7 +34,7 @@
             android:id="@+id/app_btn_FeedBack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Feed back"
+            android:text="@string/about_contactar"
             android:layout_marginTop="150dp"
             android:textSize="30sp"/>
 

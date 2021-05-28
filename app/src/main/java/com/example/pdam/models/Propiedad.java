@@ -1,31 +1,36 @@
 package com.example.pdam.models;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class Propiedad {
 
     private String pID;
     private String id_usuario;
     private String nombreDescriptivo;
+    private String propDesc;
     private String tipo;
     private String precio;
     private String periodo;
     private String provincia;
     private String municipio;
     private String direccion;
-    private String cp;
+    private String propCP;
+    private LatLng propGEO;
+    private String propFotoURI;
     //private String id_chat;
 
     public Propiedad() {
         // Default constructor required for calls to DataSnapshot.getValue(Propiedad.class)
     }
 
-    public Propiedad(String id_usuario, String nombreDescriptivo, String tipo, String periodo, String precio, String provincia, String cp, String municipio, String direccion) {
+    public Propiedad(String id_usuario, String nombreDescriptivo, String tipo, String periodo, String precio, String provincia, String propCP, String municipio, String direccion) {
         this.id_usuario = id_usuario;
         this.nombreDescriptivo = nombreDescriptivo;
         this.tipo = tipo;
         this.periodo = periodo;
         this.precio = precio;
         this.provincia = provincia;
-        this.cp = cp;
+        this.propCP = propCP;
         this.municipio = municipio;
         this.direccion = direccion;
     }
@@ -40,7 +45,7 @@ public class Propiedad {
         this.provincia = propiedad.provincia;
         this.municipio = propiedad.municipio;
         this.direccion = propiedad.direccion;
-        this.cp = propiedad.cp;
+        this.propCP = propiedad.propCP;
     }
 
     public String getpID() {
@@ -116,10 +121,10 @@ public class Propiedad {
     }
 
     public String getCp() {
-        return cp;
+        return propCP;
     }
 
-    public void setCp(String cp) {
-        this.cp = cp;
+    public void setCp(String propCP) {
+        this.propCP = propCP;
     }
 }

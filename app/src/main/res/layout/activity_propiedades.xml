@@ -21,8 +21,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/propiedadesLista"
@@ -39,6 +37,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/ic_baseline_add_24"
-        android:contentDescription="@string/btnaddprop" />
+        android:contentDescription="propiedadesFloatBtn" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

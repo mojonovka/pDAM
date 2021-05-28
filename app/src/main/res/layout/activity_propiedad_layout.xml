@@ -10,17 +10,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="1dp"
-        android:background="@color/cardview_light_background"
+        android:background="@color/bg_gris"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:animateLayoutChanges="true"
             android:orientation="vertical"
             android:padding="5dp">
 
-            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+            <!-- ************************* FOTO ************************* -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                android:layout_gravity="center"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/inmb_iv_uFoto"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:layout_margin="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.497"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@drawable/ic_hamster_svg" />
+
+                    <Button
+                        android:id="@+id/inmb_btn_SelectImg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Selecciónar imagen"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- ************************* Nombre Descriptivo ************************* -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,7 +77,7 @@
                     android:paddingVertical="5dp">
 
                     <TextView
-                        android:id="@+id/plTvPropNombreDescriptivo"
+                        android:id="@+id/inmb_tv_inmbNombreDesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/prop_nombre_descriptivo"
@@ -45,7 +85,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/plEtPropNombreDescriptivo"
+                        android:id="@+id/inmb_et_inmbNombreDesc"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/prop_hint_breve_y_clara"
@@ -56,16 +96,8 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-            <!--
-            <com.google.android.material.internal.BaselineLayout
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="3dp"
-                android:background="@color/cardview_dark_background" />
--->
-            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 
+            <!-- ************************* Descripción completa ************************* -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,7 +114,44 @@
                     android:paddingVertical="5dp">
 
                     <TextView
-                        android:id="@+id/plTvPropTipo"
+                        android:id="@+id/inmb_tv_inmbDescCompleta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Descripción completa"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/inmb_et_inmbDescCompleta"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Descripción completa"
+                        android:importantForAutofill="no"
+                        android:inputType="text"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- ************************* Tipo ************************* -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp">
+
+                    <TextView
+                        android:id="@+id/inmb_tv_inmbTipo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/prop_tipo"
@@ -90,7 +159,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/plEtPropTipo"
+                        android:id="@+id/inmb_et_inmbTipo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/prop_hint_tipo_de_la_propiedad"
@@ -101,7 +170,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+            <!-- ************************* Periodo *************************  -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -118,7 +187,7 @@
                     android:paddingVertical="5dp">
 
                     <TextView
-                        android:id="@+id/plTvPropPeriodo"
+                        android:id="@+id/inmb_tv_inmbPeriodo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/prop_periodo"
@@ -126,7 +195,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/plEtPropPeriodo"
+                        android:id="@+id/inmb_et_inmbPeriodo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/prop_hint_horas_dias_meses"
@@ -137,7 +206,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+            <!-- ************************* Precio ************************* -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,7 +223,7 @@
                     android:paddingVertical="5dp">
 
                     <TextView
-                        android:id="@+id/plTvPropPrecio"
+                        android:id="@+id/inmb_tv_inmbPrecio"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/prop_precio"
@@ -162,7 +231,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/plEtPropPrecio"
+                        android:id="@+id/inmb_et_inmbPrecio"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/prop_hint_25"
@@ -173,8 +242,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-
-            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+            <!-- ************************* Provincia ************************* -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -191,7 +259,7 @@
                     android:paddingVertical="5dp">
 
                     <TextView
-                        android:id="@+id/plTvPropProvincia"
+                        android:id="@+id/inmb_tv_inmbProvincia"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/prop_provincia"
@@ -199,7 +267,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/plEtPropProvincia"
+                        android:id="@+id/inmb_et_inmbProvincia"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/prop_hint_ej_almer_a_granada"
@@ -210,7 +278,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+            <!-- ************************* Municipio ************************* -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -227,7 +295,7 @@
                     android:paddingVertical="5dp">
 
                     <TextView
-                        android:id="@+id/plTvPropMunicipio"
+                        android:id="@+id/inmb_tv_inmbMunicipio"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/prop_municipio"
@@ -235,7 +303,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/plEtPropMunicipio"
+                        android:id="@+id/inmb_et_inmbMunicipio"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/prop_himt_nombre_de_la_poblacion"
@@ -246,7 +314,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+            <!-- ************************* CP ************************* -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -263,7 +331,7 @@
                     android:paddingVertical="5dp">
 
                     <TextView
-                        android:id="@+id/plTvPropCP"
+                        android:id="@+id/inmb_tv_inmbCP"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/prop_cp"
@@ -271,7 +339,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/plEtPropCP"
+                        android:id="@+id/inmb_et_inmbCP"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/prop_hint_ej_04740"
@@ -282,7 +350,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
+            <!-- ************************* Dirección ************************* -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -299,7 +367,7 @@
                     android:paddingVertical="5dp">
 
                     <TextView
-                        android:id="@+id/plTvPropDireccion"
+                        android:id="@+id/inmb_tv_inmbDireccion"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/prop_direccion"
@@ -307,7 +375,7 @@
                         android:textSize="20sp" />
 
                     <EditText
-                        android:id="@+id/plEtPropDireccion"
+                        android:id="@+id/inmb_et_inmbDireccion"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/prop_hint_tipo_de_via_edificio_bloue_piso_puerta"
@@ -317,6 +385,60 @@
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <!-- ************************* Disponibilidad ************************* -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="5dp">
+
+                    <TextView
+                        android:id="@+id/inmb_tv_inmbDisp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:text="Disponible?"
+                        android:textColor="@color/purple_500"
+                        android:textSize="20sp" />
+
+                    <Switch
+                        android:id="@+id/inmb_sw_inmbDisp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!--
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="3dp"
+                app:cardUseCompatPadding="true">
+                <Button
+                    android:id="@+id/prop_ver_sobre_la_mapa"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:text="Ver sobre la mapa"></Button>
+            </androidx.cardview.widget.CardView>
+
+            -->
 
             <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| -->
 

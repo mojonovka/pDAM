@@ -2,6 +2,7 @@ package com.example.pdam.providers;
 
 import android.util.Log;
 
+import com.example.pdam.models.Inmueble;
 import com.example.pdam.models.Propiedad;
 import com.example.pdam.models.User;
 import com.google.android.gms.tasks.Task;
@@ -11,7 +12,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class PropiedadProvider {
 
     DatabaseReference mDatabaseReference;
-    Propiedad propData;
 
     private static final String TAG = "DEV";
 
@@ -19,24 +19,8 @@ public class PropiedadProvider {
      * imicialización de la clase
      */
     public PropiedadProvider(){
-        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("propiedades");
+        mDatabaseReference = FirebaseDatabase.getInstance().getReference().child("inmueble");
         Log.i(TAG, "PropiedadProvider: getReference() " + mDatabaseReference);
-    }
-
-    /**
-     * Guardar propiedad en la base de datos
-     * @param propiedad
-     * @return
-     */
-    public Task<Void> setPropiedad(Propiedad propiedad){
-        /*
-        recibimos id unico,
-        rellenamos este campo en la propiedad
-        guardamos propiedad en la BD
-         */
-        DatabaseReference pushedPropRef = mDatabaseReference.push();
-        propiedad.setpID(pushedPropRef.getKey());
-        return mDatabaseReference.child(propiedad.getpID()).setValue(propiedad);
     }
 
     /**
@@ -44,9 +28,9 @@ public class PropiedadProvider {
      * @param prop
      * @return
      */
-    public Task<Void> updatePropiedad(Propiedad prop) {
+    public Task<Void> updatePropiedad(Inmueble prop) {
         Log.i(TAG, "PropieadProvider: inserción datos de usuario a BD " + prop);
-        return mDatabaseReference.child(prop.getpID()).setValue(prop);
+        return mDatabaseReference.child(prop.getInmbID()).setValue(prop);
     }
 
     /**
@@ -68,6 +52,15 @@ public class PropiedadProvider {
 
     public DatabaseReference getPropiedadesDataBaseReference(){
         return mDatabaseReference;
+    }
+
+    public Task<Void> setInmb(Inmueble inmb){
+        /*
+        recibimos id unico,
+        rellenamos este campo en la propiedad
+        guardamos propiedad en la BD
+         */
+        return mDatabaseReference.child(inmb.getInmbID()).setValue(inmb);
     }
 
 }

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.pdam.R;
@@ -18,6 +20,10 @@ public class PropSeachAttr extends AppCompatActivity {
     private TextView tvPropSeachPeriodo;
 
     private FloatingActionButton floatBTN;
+
+    private Switch swMunicipio;
+    private Switch swProvincia;
+    private Switch swPeriodo;
 
     private static final String TAG = "DEV";
 
@@ -35,6 +41,8 @@ public class PropSeachAttr extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prop_seach_attr);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         saProvincia = getIntent().getStringExtra("saProvincia");
         saMunicipio = getIntent().getStringExtra("saMunicipio");
         saPeriodo = getIntent().getStringExtra("saPeriodo");
@@ -49,20 +57,74 @@ public class PropSeachAttr extends AppCompatActivity {
         tvPropSeachMunicipio = findViewById(R.id.prop_seach_municipio);
         tvPropSeachPeriodo = findViewById(R.id.prop_seach_periodo);
 
+        tvPropSeachProvincia.setEnabled(false);
+        tvPropSeachMunicipio.setEnabled(false);
+        tvPropSeachPeriodo.setEnabled(false);
+
+        swProvincia = findViewById(R.id.seachSwithProvincia);
+        swMunicipio = findViewById(R.id.seachSwithMunicipio);
+        swPeriodo = findViewById(R.id.seachSwithPeriodo);
+
+
         floatBTN = findViewById(R.id.prop_seach_save);
 
-        if (saProvincia != null){
+        if (!saProvincia.isEmpty()){
             tvPropSeachProvincia.setText(saProvincia);
+            tvPropSeachProvincia.setEnabled(true);
+            swProvincia.setChecked(true);
         }
-        if (saMunicipio != null){
+        if (!saMunicipio.isEmpty()){
             tvPropSeachMunicipio.setText(saMunicipio);
+            tvPropSeachMunicipio.setEnabled(true);
+            swMunicipio.setChecked(true);
         }
-        if (saPeriodo != null){
+        if (!saPeriodo.isEmpty()){
             tvPropSeachPeriodo.setText(saPeriodo);
+            tvPropSeachPeriodo.setEnabled(true);
+            swPeriodo.setChecked(true);
         }
     }
 
     private void setEventListeners() {
+
+        swProvincia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(swProvincia.isChecked()){
+                    tvPropSeachProvincia.setEnabled(true);
+                } else {
+                    saProvincia = "";
+                    tvPropSeachProvincia.setText(saProvincia);
+                    tvPropSeachProvincia.setEnabled(false);
+                }
+            }
+        });
+
+        swMunicipio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (swMunicipio.isChecked()){
+                    tvPropSeachMunicipio.setEnabled(true);
+                } else {
+                    saMunicipio = "";
+                    tvPropSeachMunicipio.setText(saMunicipio);
+                    tvPropSeachMunicipio.setEnabled(false);
+                }
+            }
+        });
+
+        swPeriodo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(swPeriodo.isChecked()){
+                    tvPropSeachPeriodo.setEnabled(true);
+                } else {
+                    saPeriodo = "";
+                    tvPropSeachPeriodo.setText(saPeriodo);
+                    tvPropSeachPeriodo.setEnabled(true);
+                }
+            }
+        });
 
         floatBTN.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -97,7 +97,7 @@ public class RegistrarseActivity extends AppCompatActivity {
     }
 
     private void guardarUsuario(String uID, String uName, String uMail) {
-        User user = new User(uID, uName, uMail);
+        User user = new User(uID, uName, uMail, "", "");
         mUserProvider.setUsuario(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
