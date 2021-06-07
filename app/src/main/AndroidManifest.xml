@@ -29,14 +29,18 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
+        <activity android:name=".views.PPAAyuda"
+            android:label="Ayuda"
+            android:parentActivityName=".views.PPAActivity"/>
+
         <activity
             android:name=".views.PPAAbout"
             android:label="Acerca de ..."
             android:parentActivityName=".views.PPAActivity" />
-
-        <activity android:name=".views.propiedad.PropInfo"
+        <activity
+            android:name=".views.propiedad.PropInfo"
             android:label="Datos del inmueble "
-            android:parentActivityName=".views.PPAActivity"/>
+            android:parentActivityName=".views.PPAActivity" />
         <activity
             android:name=".views.propiedad.PropSeachAttr"
             android:label="Ajustes de busqueda"
@@ -55,7 +59,6 @@
             android:name=".views.usuario.UserLayout"
             android:parentActivityName=".views.PPAActivity" /> <!-- usuario END -->
         <!-- auth START -->
-
         <activity
             android:name=".views.identificacion.AuthMainActivity"
             android:label="Identificación"
@@ -69,9 +72,7 @@
             android:label="Creación de una cuenta nueva"
             android:parentActivityName=".views.identificacion.AuthMainActivity" /> <!-- auth END -->
         <!-- app START -->
-
         <activity android:name=".views.PPAActivity" />
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

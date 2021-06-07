@@ -15,13 +15,11 @@ import android.widget.TextView;
 
 import com.example.pdam.R;
 import com.example.pdam.models.Inmueble;
-import com.example.pdam.models.Propiedad;
 import com.example.pdam.providers.PropiedadProvider;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -94,7 +92,7 @@ public class PropInfo extends AppCompatActivity implements OnMapReadyCallback {
     }
 
     private void rellenarPropiedad(String inmbID) {
-        mPropiedadProvider.getPropiedadById(inmbID).addValueEventListener(new ValueEventListener() {
+        mPropiedadProvider.getInmbById(inmbID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 inmbl = new Inmueble(snapshot.getValue(Inmueble.class));

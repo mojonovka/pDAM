@@ -23,13 +23,25 @@
             app:destination="@id/authMainActivity" />
         <action
             android:id="@+id/action_PPAActivity_to_propAjusteDeBusqueda"
-            app:destination="@id/propAjusteDeBusqueda" />
+            app:destination="@id/propSeachAttr" />
         <action
             android:id="@+id/action_PPAActivity_to_userLayout"
             app:destination="@id/userLayout" />
         <action
             android:id="@+id/action_PPAActivity_to_propiedadesActivity"
             app:destination="@id/propiedadesActivity" />
+        <action
+            android:id="@+id/action_PPAActivity_to_PPAAbout"
+            app:destination="@id/PPAAbout" />
+        <action
+            android:id="@+id/action_PPAActivity_to_propSeachAttr"
+            app:destination="@id/propSeachAttr" />
+        <action
+            android:id="@+id/action_PPAActivity_to_propInfo"
+            app:destination="@id/propInfo" />
+        <action
+            android:id="@+id/action_PPAActivity_to_PPAAyuda"
+            app:destination="@id/PPAAyuda" />
     </activity>
     <activity
         android:id="@+id/authMainActivity"
@@ -62,10 +74,10 @@
             app:destination="@id/logearseActivity" />
     </activity>
     <activity
-        android:id="@+id/propAjusteDeBusqueda"
-        android:name="com.example.pdam.views.propiedad.PropAjusteDeBusqueda"
+        android:id="@+id/propSeachAttr"
+        android:name="com.example.pdam.views.propiedad.PropSeachAttr"
         android:label="activity_prop_ajuste_de_busqueda"
-        tools:layout="@layout/activity_prop_ajuste_de_busqueda" >
+        tools:layout="@layout/activity_prop_seach_attr">
         <action
             android:id="@+id/action_propAjusteDeBusqueda_to_PPAActivity"
             app:destination="@id/PPAActivity" />
@@ -99,5 +111,32 @@
         <action
             android:id="@+id/action_propiedadLayout_to_propiedadesActivity"
             app:destination="@id/propiedadesActivity" />
+    </activity>
+    <activity
+        android:id="@+id/PPAAbout"
+        android:name="com.example.pdam.views.PPAAbout"
+        android:label="activity_ppa_about"
+        tools:layout="@layout/activity_ppa_about" >
+        <action
+            android:id="@+id/action_PPAAbout_to_PPAActivity"
+            app:destination="@id/PPAActivity" />
+    </activity>
+    <activity
+        android:id="@+id/propInfo"
+        android:name="com.example.pdam.views.propiedad.PropInfo"
+        android:label="activity_prop_info"
+        tools:layout="@layout/activity_prop_info" >
+        <action
+            android:id="@+id/action_propInfo_to_PPAActivity"
+            app:destination="@id/PPAActivity" />
+    </activity>
+    <activity
+        android:id="@+id/PPAAyuda"
+        android:name="com.example.pdam.views.PPAAyuda"
+        android:label="activity_ppa_ayuda"
+        tools:layout="@layout/activity_ppa_ayuda" >
+        <action
+            android:id="@+id/action_PPAAyuda_to_PPAActivity"
+            app:destination="@id/PPAActivity" />
     </activity>
 </navigation>

@@ -9,28 +9,51 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class AuthProvider {
 
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
     private static final String TAG = "DEV";
 
     public AuthProvider() {
         mAuth = FirebaseAuth.getInstance();
-        Log.i(TAG, "AuthProvider: inicialización de mAuth: " + mAuth);
+        Log.d(TAG, "AuthProvider: inicialización de mAuth: " + mAuth);
     }
 
+    /**
+     * El método crea una cuenta nueva con correo electronico y clave.
+     *
+     * @param uMail
+     * @param uPass
+     * @return Task<AuthResult>
+     *
+     */
     public Task<AuthResult> crear(String uMail, String uPass) {
-        Log.i(TAG, "AuthProvider: creación nuevo usuario con eMail: " + uMail);
+        Log.d(TAG, "AuthProvider: creación nuevo usuario con eMail: " + uMail);
         return mAuth.createUserWithEmailAndPassword(uMail, uPass);
     }
 
-    public Task<AuthResult> logear(String uMail, String uPass) {
-        Log.i(TAG, "AuthProvider: logeo de usuario con eMail: " + uMail);
+    /**
+     * El método autentifica el usuario por su correo electronico y clave.
+     *
+     * @param uMail
+     * @param uPass
+     * @return Task<AuthResult>
+     *
+     */
+    public Task<AuthResult> logearse(String uMail, String uPass) {
+        Log.d(TAG, "AuthProvider: logeo de usuario con eMail: " + uMail);
         return mAuth.signInWithEmailAndPassword(uMail, uPass);
     }
 
-    public void cerarSecion(){
+    /**
+     *  El método cierra la sesión del usuario
+     */
+    public void cerarSesion(){
         mAuth.signOut();
     }
 
+    /**
+     * EL método devuelve los datos del usuario logedo del módulo Authentication
+     * @return
+     */
     public FirebaseUser getUsuario(){
         return mAuth.getCurrentUser();
     }

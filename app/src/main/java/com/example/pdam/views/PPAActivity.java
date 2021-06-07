@@ -42,18 +42,17 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapterPP
 
     private TextView tvUserName;
     private Button btnOpcion;
-
     private FloatingActionButton floatBTN;
+
     private User usuario;
     private AuthProvider mAuthProvider;
     private UserProvider mUserProvider;
+    private PropiedadProvider propiedadProvider;
     private FirebaseUser fbUser;
 
     private ArrayList<Inmueble> listaPropiedades;
-    //private PropiedadAdapter propiedadAdapter;
     private PropiedadAdapterPPA propiedadAdapter;
     private RecyclerView rvPropiedades;
-    private PropiedadProvider propiedadProvider;
     private LinearLayoutManager llManager;
 
     private SharedPreferences sharedPreferences;
@@ -166,7 +165,7 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapterPP
             getDatosDelUsuario(fbUser.getUid());
             btnOpcion.setVisibility(View.INVISIBLE);
         } else {
-            tvUserName.setText("bienvenido");
+            tvUserName.setText("Bienvenido");
             btnOpcion.setVisibility(View.VISIBLE);
         }
     }
@@ -184,7 +183,7 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapterPP
                 } catch (Exception e){
                     e.printStackTrace();
                     Log.i(TAG, "PPAActivity: bad user data");
-                    mAuthProvider.cerarSecion();
+                    mAuthProvider.cerarSesion();
                 } finally {
 
                 }
@@ -199,7 +198,7 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapterPP
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.i(TAG, "PPAActivity: obtención de datos ha fallado:");
                 tvUserName.setText("algo va mal");
-                mAuthProvider.cerarSecion();
+                mAuthProvider.cerarSesion();
                 usuario = null;
             }
         });
@@ -209,6 +208,8 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapterPP
     public boolean onCreateOptionsMenu(Menu menu) {
         if(fbUser != null){
             getMenuInflater().inflate(R.menu.menu_items, menu);
+        } else {
+            getMenuInflater().inflate(R.menu.menu_item_no_auth, menu);
         }
         return super.onCreateOptionsMenu(menu);
     }
@@ -230,14 +231,21 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapterPP
                 return true;
 
             case R.id.menu_cerrarSesion:
-                mAuthProvider.cerarSecion();
+                mAuthProvider.cerarSesion();
                 intent = new Intent(PPAActivity.this, PPAActivity.class);
                 startActivity(intent);
                 return true;
+
             case R.id.menu_about:
                 intent = new Intent(PPAActivity.this, PPAAbout.class);
                 startActivity(intent);
                 return true;
+
+            case R.id.menu_ayuda:
+                intent = new Intent(PPAActivity.this, PPAAyuda.class);
+                startActivity(intent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -247,7 +255,7 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapterPP
 
         Log.i(TAG, "PropiedadesActivity: rellenarPropiedades()");
 
-        propiedadProvider.getPropiedadesDataBaseReference()
+        propiedadProvider.getInmbDBReference()
                 .orderByChild("inmbTimeStamp").limitToLast(25)
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -274,10 +282,6 @@ public class PPAActivity extends AppCompatActivity implements PropiedadAdapterPP
 
                     }
                 });
-        /**
-         * .orderByChild("inmbID")
-         * .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
-         */
     }
 
     private boolean isGoodForSeach(Inmueble prop) {

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.pdam.R;
+import com.example.pdam.providers.AuthProvider;
 import com.example.pdam.views.PPAActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,7 +26,7 @@ public class LogearseActivity extends AppCompatActivity {
     private EditText etEmailLogin, etUpassLogin;
     private Button btnLogearse;
 
-    private FirebaseAuth mAuth;
+    private AuthProvider mAuthProvider;
     private DatabaseReference mDatabase;
 
     private static final String TAG = "DEV";
@@ -45,7 +46,8 @@ public class LogearseActivity extends AppCompatActivity {
 
         btnLogearse = (Button) findViewById(R.id.btnLogearse);
 
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
+        mAuthProvider = new AuthProvider();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         btnLogearse.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +64,8 @@ public class LogearseActivity extends AppCompatActivity {
         String uPass = etUpassLogin.getText().toString();
 
         if (!eMail.isEmpty() && !uPass.isEmpty()) {
-            mAuth.signInWithEmailAndPassword(eMail, uPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            //mAuth.signInWithEmailAndPassword(eMail, uPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuthProvider.logearse(eMail, uPass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     Log.i(TAG, "LogearseActivity: inicio de proceso de logeo");

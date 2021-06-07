@@ -20,6 +20,8 @@ public class PPAAbout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ppa_about);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         btnFeedBack = findViewById(R.id.app_btn_FeedBack);
         btnFeedBack.setOnClickListener(new View.OnClickListener() {
             @Override

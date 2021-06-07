@@ -23,11 +23,11 @@ public class PropiedadAdapter extends RecyclerView.Adapter<PropiedadAdapter.View
     ArrayList<Inmueble> listaPropiedades;
     final private ListItemClick mOnClickListener;
 
-    public interface ListItemClick{
+    public interface ListItemClick {
         void onListItemClick(int clickedItem);
     }
 
-    public PropiedadAdapter(ArrayList<Inmueble> listaPropiedades, ListItemClick listener){
+    public PropiedadAdapter(ArrayList<Inmueble> listaPropiedades, ListItemClick listener) {
         this.listaPropiedades = listaPropiedades;
         mOnClickListener = listener;
     }
@@ -36,7 +36,6 @@ public class PropiedadAdapter extends RecyclerView.Adapter<PropiedadAdapter.View
     @Override
     public PropiedadAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_prop_row_card, parent, false);
-        //View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_prop_row, parent, false);
         return new PropiedadAdapter.ViewHolder(view);
     }
 
@@ -45,12 +44,12 @@ public class PropiedadAdapter extends RecyclerView.Adapter<PropiedadAdapter.View
         holder.tvPropNombreDescriptivo.setText(listaPropiedades.get(position).getInmbNombreDesc());
         holder.tvPropMunicipio.setText(listaPropiedades.get(position).getInmbMunicipio());
         holder.tvPropPeriodo.setText(" ");
-        holder.tvPropPrecio.setText(listaPropiedades.get(position).getInmbPeriodo() + " / " +listaPropiedades.get(position).getInmbPrecio() + "€");
+        holder.tvPropPrecio.setText(listaPropiedades.get(position).getInmbPeriodo() + " / " + listaPropiedades.get(position).getInmbPrecio() + "€");
         Picasso.get().load(listaPropiedades.get(position).getInmbFotoURI()).into(holder.ivPropFoto);
 
-        if (listaPropiedades.get(position).getInmbDisp()){
+        if (listaPropiedades.get(position).getInmbDisp()) {
             holder.fabDisponible.setBackgroundTintList(ColorStateList.valueOf(Color.LTGRAY));
-        }else {
+        } else {
             holder.fabDisponible.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
         }
 
@@ -60,17 +59,13 @@ public class PropiedadAdapter extends RecyclerView.Adapter<PropiedadAdapter.View
 
     @Override
     public int getItemCount() {
-        try {
-            return listaPropiedades.size();
-        } catch (Exception ex){
-            return 0;
-        }
+        return listaPropiedades.size();
     }
 
     /**
      * inner class
      */
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView tvPropNombreDescriptivo, tvPropMunicipio, tvPropPeriodo, tvPropPrecio;
         private ImageView ivPropFoto;

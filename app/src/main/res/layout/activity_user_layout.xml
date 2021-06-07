@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.usuario.UserLayout">
+    tools:context=".views.usuario.UserLayout"
+    android:background="@color/bg_gris">
 
     <ImageView
         android:id="@+id/user_iv_uFoto"

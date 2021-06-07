@@ -23,7 +23,6 @@ public class AuthMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_auth);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //getSupportActionBar().setTitle("Identificación");
 
         Log.i(TAG, "AuthMainActivity: init");
 

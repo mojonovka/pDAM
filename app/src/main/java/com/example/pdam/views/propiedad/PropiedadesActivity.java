@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.pdam.models.Inmueble;
-import com.example.pdam.models.Propiedad;
 import com.example.pdam.providers.PropiedadAdapter;
 import com.example.pdam.providers.PropiedadProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,8 +25,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 
 public class PropiedadesActivity extends AppCompatActivity implements PropiedadAdapter.ListItemClick{
@@ -37,7 +34,6 @@ public class PropiedadesActivity extends AppCompatActivity implements PropiedadA
     private PropiedadAdapter propiedadAdapter;
     private PropiedadProvider propiedadProvider;
     private LinearLayoutManager llManager;
-    private String usuario_id;
 
     private Toolbar toolbar;
     private FloatingActionButton floatBTN;
@@ -100,7 +96,7 @@ public class PropiedadesActivity extends AppCompatActivity implements PropiedadA
 
         Log.i(TAG, "PropiedadesActivity: rellenarPropiedades()");
 
-        propiedadProvider.getPropiedadesDataBaseReference()
+        propiedadProvider.getInmbDBReference()
                 .orderByChild("inmbPropID")
                 .equalTo(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
@@ -142,7 +138,6 @@ public class PropiedadesActivity extends AppCompatActivity implements PropiedadA
 
     @Override
     public void onListItemClick(int clickedItem) {
-        Toast.makeText(PropiedadesActivity.this, "Selected item" + clickedItem, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(PropiedadesActivity.this, PropiedadLayout.class);
         intent.putExtra("mode", "UPDATE");
         intent.putExtra("inmbID",listaPropiedades.get(clickedItem).getInmbID());

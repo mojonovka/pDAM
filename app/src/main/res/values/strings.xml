@@ -7,7 +7,7 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
-    <string name="cerrar_secion">Cerrar seción</string>
+    <string name="cerrar_secion">Cerrar sesión</string>
     <string name="ver_perfil">Ver perfil</string>
     <string name="title_activity_propiedad">Inmuebles propios</string>
     <!-- Strings used for fragments for navigation -->
@@ -35,4 +35,7 @@
 
     <string name="about_contactar">Contactar</string>
     <string name="prop_seach_btn_aplicar_ajuste_de_busqueda">aplicar_ajuste_de_busqueda</string>
+    <string name="menu_ayuda">Ayuda</string>
+    <string name="ayuda_preguntas_frecuentes"><b>Terminos generales</b></string>
+
 </resources>

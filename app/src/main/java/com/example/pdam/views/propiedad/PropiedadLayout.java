@@ -23,10 +23,8 @@ import android.widget.Toast;
 
 import com.example.pdam.R;
 import com.example.pdam.models.Inmueble;
-import com.example.pdam.models.User;
 import com.example.pdam.providers.AuthProvider;
 import com.example.pdam.providers.PropiedadProvider;
-import com.example.pdam.views.usuario.UserLayout;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -120,6 +118,9 @@ public class PropiedadLayout extends AppCompatActivity {
 
     }
 
+    /**
+     * desabilita los componentes en algunos modos
+     */
     private void deshabilitarComponentes() {
         etPropNombreDescriptivo.setEnabled(false);
         etPropTipo.setEnabled(false);
@@ -131,9 +132,12 @@ public class PropiedadLayout extends AppCompatActivity {
         etPropDireccion.setEnabled(false);
     }
 
-
+    /**
+     * rellena los componentes de la activity con las datos del objeto Inmueble
+     * @param inmbID
+     */
     private void rellenarPropiedad(String inmbID) {
-        mPropiedadProvider.getPropiedadById(inmbID).addValueEventListener(new ValueEventListener() {
+        mPropiedadProvider.getInmbById(inmbID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 inmbl = new Inmueble(snapshot.getValue(Inmueble.class));
@@ -161,98 +165,26 @@ public class PropiedadLayout extends AppCompatActivity {
         });
     }
 
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        fbUser = mAuthProvider.getUsuario();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        switch (mode) {
-            case CREATE:
-                getMenuInflater().inflate(R.menu.menu_prop_create, menu);
-                break;
-            case UPDATE:
-                getMenuInflater().inflate(R.menu.menu_prop_update, menu);
-                break;
-            case ALQUILER:
-                getMenuInflater().inflate(R.menu.menu_prop_alquiler, menu);
-                break;
-        }
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId()) {
-
-            case R.id.menu_prop_crear:
-                crearPropiedad();
-                return true;
-
-            case R.id.menu_prop_update:
-                actualizarPropiedad();
-                return true;
-
-            case R.id.menu_prop_delete:
-                //eliminarPropiedad();
-                return true;
-
-            case R.id.menu_prop_alqiler:
-                //alqularPropiedad();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    /*
-    private void alqularPropiedad() {
-
-        String propietarioID = inmbl.getId_usuario();
-
-        UserProvider userProvider = new UserProvider();
-
-        DatabaseReference mdaDatabaseReference = userProvider.getUsuarioById(propietarioID);
-
-        mdaDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = new User(snapshot.getValue(User.class));
-                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + user.getuEmail()));
-                startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
+    /**
+     * Elimina el inmueble de la base de datos
+     */
     private void eliminarPropiedad() {
-        mPropiedadProvider.eliminarPropiedad(getIntent().getStringExtra("inmbID")).addOnCompleteListener(new OnCompleteListener<Void>() {
+        mPropiedadProvider.delInmb(getIntent().getStringExtra("inmbID")).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
                     Log.i(TAG, "PropiedadLayout: propiedad se ha eleminado con exito");
                     Toast.makeText(PropiedadLayout.this,"Propiedad se ha eleminado con exito", Toast.LENGTH_LONG).show();
+                    /* eliminar imagen del inmueble del Storage*/
                     finish();
                 }
             }
         });
     }
-*/
+
+    /**
+     * Crea un inmueble en la base de datos
+     */
     private void crearPropiedad() {
 
         inmbl = setPropiedad();
@@ -263,8 +195,10 @@ public class PropiedadLayout extends AppCompatActivity {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             byte[] byteArray = baos.toByteArray();
+
             /* se obtiene identificador unico para la inmueble */
-            DatabaseReference pushedPropRef = mPropiedadProvider.getPropiedadesDataBaseReference().push();
+            /* mejor pases su obtencian al PropiedadProvider */
+            DatabaseReference pushedPropRef = mPropiedadProvider.getInmbDBReference().push();
             inmbl.setInmbID(pushedPropRef.getKey());
 
             final StorageReference curRef = storageRef.child(inmbl.getInmbID()).child("foto").child("fotoInmb");
@@ -299,7 +233,9 @@ public class PropiedadLayout extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * Actualiza inmueble en la base de datos
+     */
     private void actualizarPropiedad() {
         inmbl = setPropiedad();
         if(inmbl != null){
@@ -324,7 +260,7 @@ public class PropiedadLayout extends AppCompatActivity {
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
                         inmbl.setInmbFotoURI(task.getResult().toString());
-                        mPropiedadProvider.updatePropiedad(inmbl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        mPropiedadProvider.setInmb(inmbl).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
@@ -342,8 +278,10 @@ public class PropiedadLayout extends AppCompatActivity {
         }
     }
 
-
-
+    /**
+     * Rellena el objedo Inmueble
+     * @return objeto Inmueble
+     */
     private Inmueble setPropiedad() {
 
         Boolean isDatosCorrectos = true;
@@ -471,11 +409,91 @@ public class PropiedadLayout extends AppCompatActivity {
                 ex.printStackTrace();
                 System.out.println(ex.toString());
                 propiedad = null;
+                Log.i(TAG, "inmbGEO: Fallo al obtenes GEO segun dirección indicada" );
             }
 
         }
 
         return propiedad;
+    }
+
+      /*
+    private void alqularPropiedad() {
+
+        String propietarioID = inmbl.getId_usuario();
+
+        UserProvider userProvider = new UserProvider();
+
+        DatabaseReference mdaDatabaseReference = userProvider.getUsuarioById(propietarioID);
+
+        mdaDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User user = new User(snapshot.getValue(User.class));
+                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + user.getuEmail()));
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
+*/
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fbUser = mAuthProvider.getUsuario();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        switch (mode) {
+            case CREATE:
+                getMenuInflater().inflate(R.menu.menu_prop_create, menu);
+                break;
+            case UPDATE:
+                getMenuInflater().inflate(R.menu.menu_prop_update, menu);
+                break;
+            case ALQUILER:
+                getMenuInflater().inflate(R.menu.menu_prop_alquiler, menu);
+                break;
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.menu_prop_crear:
+                crearPropiedad();
+                return true;
+
+            case R.id.menu_prop_update:
+                actualizarPropiedad();
+                return true;
+
+            case R.id.menu_prop_delete:
+                eliminarPropiedad();
+                return true;
+
+            case R.id.menu_prop_alqiler:
+                //alqularPropiedad();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     private void initComponents() {

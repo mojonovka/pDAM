@@ -42,7 +42,7 @@
 
             <TextView
                 android:id="@+id/propRow_nombre_descriptivo"
-                android:layout_width="match_parent"
+                android:layout_width="191dp"
                 android:layout_height="match_parent"
                 android:contentDescription="propFoto"
                 android:padding="10dp"
@@ -61,7 +61,7 @@
 
             <TextView
                 android:id="@+id/propRow_municipio"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:text="Nombre del pueblo"
@@ -78,7 +78,7 @@
 
             <TextView
                 android:id="@+id/propRow_precio"
-                android:layout_width="0dp"
+                android:layout_width="213dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:text="precio"

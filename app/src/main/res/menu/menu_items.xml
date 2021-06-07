@@ -12,7 +12,14 @@
     <item
         android:id="@+id/menu_propiedades"
         android:title="@string/menu_inmuebles"
-        android:orderInCategory="6"
+        android:orderInCategory="4"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/menu_ayuda"
+        android:title="@string/menu_ayuda"
+        android:orderInCategory="5"
         app:showAsAction="never"
         />
 
