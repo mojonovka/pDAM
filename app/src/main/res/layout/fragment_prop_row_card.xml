@@ -43,12 +43,12 @@
             <TextView
                 android:id="@+id/propRow_nombre_descriptivo"
                 android:layout_width="191dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:contentDescription="propFoto"
                 android:padding="10dp"
                 android:text="Nombre descriptivo"
                 android:textAlignment="center"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -61,29 +61,19 @@
 
             <TextView
                 android:id="@+id/propRow_municipio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:text="Nombre del pueblo"
-                android:textSize="15sp" />
-
-            <TextView
-                android:id="@+id/propRow_periodo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:text="periodo"
-                android:textAlignment="textEnd"
-                android:textSize="15sp" />
-
+                android:layout_weight="4"
+                android:text="Nombre del pueblo"
+                android:textSize="13sp" />
             <TextView
                 android:id="@+id/propRow_precio"
-                android:layout_width="213dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_weight="4"
                 android:text="precio"
                 android:textAlignment="textEnd"
-                android:textSize="20sp" />
+                android:textSize="15sp" />
 
         </LinearLayout>
 

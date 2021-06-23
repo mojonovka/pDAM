@@ -17,17 +17,17 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:text="Autor: Roman Vyrvin"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:text="Versión: 0.0.9"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
+            android:textSize="20sp"
             android:text="EMail: appmail@gmail.com"/>
 
         <Button
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="@string/about_contactar"
             android:layout_marginTop="150dp"
-            android:textSize="30sp"/>
+            android:textSize="25sp"/>
 
 
     </LinearLayout>

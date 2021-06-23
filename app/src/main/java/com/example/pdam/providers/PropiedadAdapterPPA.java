@@ -42,7 +42,7 @@ public class PropiedadAdapterPPA extends RecyclerView.Adapter<PropiedadAdapterPP
 
         holder.tvPropNombreDescriptivo.setText(listaPropiedades.get(position).getInmbNombreDesc());
         holder.tvPropMunicipio.setText(listaPropiedades.get(position).getInmbMunicipio());
-        holder.tvPropPeriodo.setText(" ");
+        //holder.tvPropPeriodo.setText(" ");
         holder.tvPropPrecio.setText(listaPropiedades.get(position).getInmbPeriodo() + " / " +listaPropiedades.get(position).getInmbPrecio() + "€");
         Picasso.get().load(listaPropiedades.get(position).getInmbFotoURI()).into(holder.ivPropFoto);
 
@@ -70,7 +70,7 @@ public class PropiedadAdapterPPA extends RecyclerView.Adapter<PropiedadAdapterPP
 
             tvPropNombreDescriptivo = itemView.findViewById(R.id.propRow_nombre_descriptivo);
             tvPropMunicipio = itemView.findViewById(R.id.propRow_municipio);
-            tvPropPeriodo = itemView.findViewById(R.id.propRow_periodo);
+            //tvPropPeriodo = itemView.findViewById(R.id.propRow_periodo);
             tvPropPrecio = itemView.findViewById(R.id.propRow_precio);
             ivPropFoto = itemView.findViewById(R.id.propRow_img);
             fabDisponible = itemView.findViewById(R.id.propRow_FAB);

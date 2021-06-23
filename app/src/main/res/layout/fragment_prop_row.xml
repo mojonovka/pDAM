@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="6"
             android:text="Nombre del pueblo"
-            android:textSize="15sp" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/propRow_precio"
@@ -50,7 +50,7 @@
             android:layout_weight="2"
             android:text="precio"
             android:textAlignment="textEnd"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
 
     </LinearLayout>
 

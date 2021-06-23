@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -15,7 +17,9 @@ import android.widget.TextView;
 
 import com.example.pdam.R;
 import com.example.pdam.models.Inmueble;
+import com.example.pdam.models.User;
 import com.example.pdam.providers.PropiedadProvider;
+import com.example.pdam.providers.UserProvider;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -43,6 +47,10 @@ public class PropInfo extends AppCompatActivity implements OnMapReadyCallback {
 
     private PropiedadProvider mPropiedadProvider;
     private Inmueble inmbl;
+    private User usuario;
+
+
+    private UserProvider mUserProvider;
 
 
     @Override
@@ -74,13 +82,30 @@ public class PropInfo extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
                 //iniciar chat
-                //escribir email
+
+                mUserProvider.getUsuarioById(inmbl.getInmbPropID()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @org.jetbrains.annotations.NotNull DataSnapshot snapshot) {
+
+                        usuario = new User(snapshot.getValue(User.class));
+
+                        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + usuario.getuEmail()));
+                        startActivity(intent);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @org.jetbrains.annotations.NotNull DatabaseError error) {
+
+                    }
+                });
             }
         });
     }
 
     private void inicializarComponentes() {
         mPropiedadProvider = new PropiedadProvider();
+        mUserProvider = new UserProvider();
 
         tvInfoNombreDescriptivo = findViewById(R.id.infoNombreDescriptivo);
         ivInfoFoto = findViewById(R.id.infoFoto);
@@ -136,6 +161,14 @@ public class PropInfo extends AppCompatActivity implements OnMapReadyCallback {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+            googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + inmbl.getInmbGEOLat() + "," + inmbl.getInmbGEOLng());
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    startActivity(mapIntent);
+                }
+            });
             return;
         }
         googleMap.setMyLocationEnabled(true);
